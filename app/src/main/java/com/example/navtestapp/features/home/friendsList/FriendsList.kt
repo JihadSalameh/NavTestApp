@@ -8,10 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.example.navtestapp.Screen
 
 @Composable
-fun FriendsList() {
+fun FriendsList(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -19,14 +20,11 @@ fun FriendsList() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Friends List Page")
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { navController.navigate(Screen.ProfileScreen.route) }) {
             Text(text = "View First Friend Profile")
         }
+        Button(onClick = { navController.navigate(Screen.LoginScreen.route) }) {
+            Text(text = "logout")
+        }
     }
-}
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun FriendsListPreview() {
-    FriendsList()
 }
