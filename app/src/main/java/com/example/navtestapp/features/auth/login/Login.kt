@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -29,21 +30,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.navtestapp.R
 import com.example.navtestapp.Screen
 import com.example.navtestapp.components.TabComponent
 import com.example.navtestapp.components.TabRowComponent
 
 @Composable
 fun Login(navController: NavController) {
-    var text1 by remember {
+    var email by remember {
         mutableStateOf("")
     }
-    var text2 by remember {
+    var password by remember {
+        mutableStateOf("")
+    }
+    var phoneNumber by remember {
         mutableStateOf("")
     }
     val tiles = listOf("Email Address", "Phone Number")
@@ -79,37 +85,62 @@ fun Login(navController: NavController) {
             }
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        TextField(
-            value = text1,
-            onValueChange = {temp ->
-                text1 = temp
-            },
-            Modifier
-                .clip(shape = RectangleShape)
-                .fillMaxWidth()
-                .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
-            placeholder = {
-                Text(text = "Name")
-            }
-        )
-        Spacer(modifier = Modifier.padding(10.dp))
-        TextField(
-            value = text2,
-            onValueChange = {temp ->
-                text2 = temp
-            },
-            Modifier
-                .clip(shape = RectangleShape)
-                .fillMaxWidth()
-                .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
-            placeholder = {
-                Text(text = "Password")
-            },
-            visualTransformation = PasswordVisualTransformation()
-        )
+        if(selectedTab == 0) {
+            TextField(
+                value = email,
+                onValueChange = {temp ->
+                    email = temp
+                },
+                Modifier
+                    .clip(shape = RectangleShape)
+                    .fillMaxWidth()
+                    .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
+                placeholder = {
+                    Text(text = "Email")
+                },
+                leadingIcon = {
+                    Icon(painter = painterResource(id = R.drawable.baseline_email_24), contentDescription = "Email")
+                }
+            )
+            Spacer(modifier = Modifier.padding(10.dp))
+            TextField(
+                value = password,
+                onValueChange = {temp ->
+                    password = temp
+                },
+                Modifier
+                    .clip(shape = RectangleShape)
+                    .fillMaxWidth()
+                    .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
+                placeholder = {
+                    Text(text = "Password")
+                },
+                visualTransformation = PasswordVisualTransformation(),
+                leadingIcon = {
+                    Icon(painter = painterResource(id = R.drawable.baseline_lock_24), contentDescription = "Email")
+                }
+            )
+        } else {
+            TextField(
+                value = phoneNumber,
+                onValueChange = { temp ->
+                    phoneNumber = temp
+                },
+                Modifier
+                    .clip(shape = RectangleShape)
+                    .fillMaxWidth()
+                    .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
+                placeholder = {
+                    Text(text = "Phone Number")
+                },
+                leadingIcon = {
+                    Icon(painter = painterResource(id = R.drawable.baseline_numpad_24), contentDescription = "Email")
+                }
+            )
+        }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { navController.navigate(Screen.FriendsListScreen.routeWithArgs(text1)) },
+            onClick = { navController.navigate(Screen.FriendsListScreen.routeWithArgs(email)) },
             modifier = Modifier
                 .clip(shape = RectangleShape)
                 .fillMaxWidth()
@@ -136,15 +167,17 @@ fun Login(navController: NavController) {
                 fontWeight = FontWeight.Bold
             )
         }
-        Spacer(modifier = Modifier.padding(10.dp))
-        Text(
-            text = "Forgot Password?",
-            Modifier
-                .clickable {
-                    Log.d("test", "Hello World")
-                },
-            color = Color.Red,
-            fontWeight = FontWeight.Bold
-        )
+        if(selectedTab == 0) {
+            Spacer(modifier = Modifier.padding(10.dp))
+            Text(
+                text = "Forgot Password?",
+                Modifier
+                    .clickable {
+                        Log.d("test", "Hello World")
+                    },
+                color = Color.Red,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
