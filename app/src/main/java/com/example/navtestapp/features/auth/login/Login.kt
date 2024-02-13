@@ -73,7 +73,7 @@ fun Login(navController: NavController) {
             visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.padding(10.dp))
-        Button(onClick = { navController.navigate(Screen.FriendsListScreen.route) }) {
+        Button(onClick = { navController.navigate(Screen.FriendsListScreen.routeWithArgs(text1)) }) {
             Text(text = "Login")
         }
         Spacer(modifier = Modifier.padding(10.dp))

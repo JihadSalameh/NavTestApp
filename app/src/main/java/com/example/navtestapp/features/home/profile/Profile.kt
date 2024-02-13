@@ -20,7 +20,7 @@ fun Profile(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Profile Page")
-        Button(onClick = { navController.navigate(Screen.FriendsListScreen.route) }) {
+        Button(onClick = { navController.popBackStack() }) {
             Text(text = "Back")
         }
     }

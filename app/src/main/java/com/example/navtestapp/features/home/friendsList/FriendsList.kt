@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import com.example.navtestapp.Screen
 
 @Composable
-fun FriendsList(navController: NavController) {
+fun FriendsList(navController: NavController, name: String?) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -20,6 +20,7 @@ fun FriendsList(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Friends List Page")
+        Text(text = "Hello, $name")
         Button(onClick = { navController.navigate(Screen.ProfileScreen.route) }) {
             Text(text = "View First Friend Profile")
         }
