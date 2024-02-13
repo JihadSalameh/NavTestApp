@@ -1,13 +1,18 @@
 package com.example.navtestapp.features.auth.login
 
+import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -21,6 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,17 +44,19 @@ fun Login(navController: NavController) {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-
     ) {
         Text(
             modifier = Modifier
                 .wrapContentHeight()
                 .wrapContentWidth(),
-            text = "Login Page",
-            fontSize = 26.sp
+            text = "Login",
+            fontSize = 26.sp,
+            color = Color.White
         )
         Spacer(modifier = Modifier.padding(10.dp))
         TextField(
@@ -55,7 +64,10 @@ fun Login(navController: NavController) {
             onValueChange = {temp ->
                 text1 = temp
             },
-            Modifier.clip(shape = CircleShape),
+            Modifier
+                .clip(shape = RectangleShape)
+                .fillMaxWidth()
+                .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
             placeholder = {
                 Text(text = "Name")
             }
@@ -66,27 +78,53 @@ fun Login(navController: NavController) {
             onValueChange = {temp ->
                 text2 = temp
             },
-            Modifier.clip(shape = CircleShape),
+            Modifier
+                .clip(shape = RectangleShape)
+                .fillMaxWidth()
+                .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
             placeholder = {
                 Text(text = "Password")
             },
             visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.padding(10.dp))
-        Button(onClick = { navController.navigate(Screen.FriendsListScreen.routeWithArgs(text1)) }) {
-            Text(text = "Login")
+        Button(
+            onClick = { navController.navigate(Screen.FriendsListScreen.routeWithArgs(text1)) },
+            modifier = Modifier
+                .clip(shape = RectangleShape)
+                .fillMaxWidth()
+                .padding(16.dp, 0.dp, 16.dp, 0.dp),
+            colors = ButtonDefaults.buttonColors(Color.Red)
+        ) {
+            Text(text = "Login", fontSize = 25.sp)
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Column(
+        Row(
             modifier = Modifier
                 .wrapContentHeight()
                 .wrapContentWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "If you don't have an account SignUp!", fontSize = 14.sp)
-            Button(onClick = { navController.navigate(Screen.SignUpScreen.route) }, colors = ButtonDefaults.buttonColors(Color.Black)) {
-                Text(text = "SignUp")
-            }
+            Text(text = "Don't have an account? ", fontSize = 14.sp, color = Color.White)
+            Text(
+                text = "Sign Up",
+                Modifier.clickable {
+                    navController.navigate(Screen.SignUpScreen.route)
+                },
+                color = Color.Red,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
+        Spacer(modifier = Modifier.padding(10.dp))
+        Text(
+            text = "Forgot Password?",
+            Modifier
+                .clickable {
+                    Log.d("test", "Hello World")
+                },
+            color = Color.Red,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
