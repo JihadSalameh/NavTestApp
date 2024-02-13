@@ -19,8 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.navtestapp.Screen
+import com.example.navtestapp.components.TabComponent
+import com.example.navtestapp.components.TabRowComponent
 
 @Composable
 fun Login(navController: NavController) {
@@ -41,6 +45,10 @@ fun Login(navController: NavController) {
     }
     var text2 by remember {
         mutableStateOf("")
+    }
+    val tiles = listOf("Email Address", "Phone Number")
+    var selectedTab by rememberSaveable {
+        mutableIntStateOf(0)
     }
 
     Column(
@@ -58,6 +66,18 @@ fun Login(navController: NavController) {
             fontSize = 26.sp,
             color = Color.White
         )
+        Spacer(modifier = Modifier.padding(10.dp))
+        TabRowComponent(modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 0.dp), selectedTabIndex = selectedTab) {
+            tiles.forEachIndexed {index, title ->
+                TabComponent(
+                    selected = selectedTab == index,
+                    onClick = { selectedTab = index },
+                    text = {
+                        Text(text = title)
+                    }
+                )
+            }
+        }
         Spacer(modifier = Modifier.padding(10.dp))
         TextField(
             value = text1,
