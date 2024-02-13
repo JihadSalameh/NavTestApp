@@ -117,7 +117,7 @@ fun Login(navController: NavController) {
                 },
                 visualTransformation = PasswordVisualTransformation(),
                 leadingIcon = {
-                    Icon(painter = painterResource(id = R.drawable.baseline_lock_24), contentDescription = "Email")
+                    Icon(painter = painterResource(id = R.drawable.baseline_lock_24), contentDescription = "Password")
                 }
             )
         } else {
@@ -134,7 +134,7 @@ fun Login(navController: NavController) {
                     Text(text = "Phone Number")
                 },
                 leadingIcon = {
-                    Icon(painter = painterResource(id = R.drawable.baseline_numpad_24), contentDescription = "Email")
+                    Icon(painter = painterResource(id = R.drawable.baseline_numpad_24), contentDescription = "Phone Number")
                 }
             )
         }
