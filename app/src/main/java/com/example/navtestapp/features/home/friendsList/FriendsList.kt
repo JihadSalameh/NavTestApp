@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,6 +29,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.navtestapp.R
 import com.example.navtestapp.Screen
+import com.example.navtestapp.components.UserList
+import com.example.navtestapp.data.Datasource
 
 const val HOME_NAV_GRAPH_ROUTE = "home_navigation_graph_route"
 
@@ -70,15 +74,17 @@ fun FriendsList(
             Text(text = "Hello, $name", color = Color.White)
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Button(
-            onClick = { navController.navigate(Screen.ProfileScreen.route) },
-            colors = ButtonDefaults.buttonColors(Color.Red),
-            modifier = Modifier
-                .clip(shape = RectangleShape)
-                .padding(16.dp, 0.dp, 16.dp, 0.dp)
-        ) {
-            Text(text = "View First Friend Profile")
-        }
+        Divider(modifier = Modifier.fillMaxWidth(), color = Color.Red)
+        UserList(users = Datasource().loadUsers(), navController = navController)
+//        Button(
+//            onClick = { navController.navigate(Screen.ProfileScreen.route) },
+//            colors = ButtonDefaults.buttonColors(Color.Red),
+//            modifier = Modifier
+//                .clip(shape = RectangleShape)
+//                .padding(16.dp, 0.dp, 16.dp, 0.dp)
+//        ) {
+//            Text(text = "View First Friend Profile")
+//        }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
             onClick = {

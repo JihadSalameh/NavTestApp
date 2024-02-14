@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">NavTestApp</string>
+    <string name="user1">Jihad</string>
+    <string name="user2">khalil</string>
+    <string name="user3">Mohammad</string>
+    <string name="user4">Osama</string>
+    <string name="user5">Ahmad</string>
+    <string name="user6">Sufian</string>
+    <string name="user7">Tarik</string>
+    <string name="user8">Saed</string>
+    <string name="user9">Ali</string>
+    <string name="user10">Yousef</string>
 </resources>

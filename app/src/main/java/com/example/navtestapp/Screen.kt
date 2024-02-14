@@ -20,4 +20,15 @@ sealed class Screen(
         }
     }
 
+    fun routeWithIntArgs(
+        vararg args: Int
+    ): String {
+        return buildString {
+            append(route)
+            args.forEach { arg ->
+                append("/$arg")
+            }
+        }
+    }
+
 }

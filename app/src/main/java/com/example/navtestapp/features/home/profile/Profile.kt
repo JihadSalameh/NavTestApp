@@ -23,7 +23,8 @@ import androidx.navigation.NavController
 
 @Composable
 fun Profile(
-    navController: NavController
+    navController: NavController,
+    name: Int?
 ) {
     Column(
         modifier = Modifier
