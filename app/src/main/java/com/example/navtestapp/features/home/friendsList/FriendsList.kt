@@ -76,15 +76,6 @@ fun FriendsList(
         Spacer(modifier = Modifier.padding(10.dp))
         Divider(modifier = Modifier.fillMaxWidth(), color = Color.Red)
         UserList(users = Datasource().loadUsers(), navController = navController)
-//        Button(
-//            onClick = { navController.navigate(Screen.ProfileScreen.route) },
-//            colors = ButtonDefaults.buttonColors(Color.Red),
-//            modifier = Modifier
-//                .clip(shape = RectangleShape)
-//                .padding(16.dp, 0.dp, 16.dp, 0.dp)
-//        ) {
-//            Text(text = "View First Friend Profile")
-//        }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
             onClick = {
