@@ -146,7 +146,7 @@ fun Login(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { navController.navigate(Screen.FriendsListScreen.routeWithArgs(email)) },
+            onClick = { navController.navigate(Screen.FriendsListScreen.route + "?email=$email") },
             modifier = Modifier
                 .clip(shape = RectangleShape)
                 .fillMaxWidth()

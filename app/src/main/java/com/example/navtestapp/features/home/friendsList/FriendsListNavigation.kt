@@ -11,7 +11,7 @@ fun NavGraphBuilder.friendsListScreenNavigation(
     navController: NavController
 ) {
     composable(
-        route = Screen.FriendsListScreen.route + "/{email}",
+        route = Screen.FriendsListScreen.route + "?email={email}",
         arguments = listOf(
             navArgument("email") {
                 nullable = true
