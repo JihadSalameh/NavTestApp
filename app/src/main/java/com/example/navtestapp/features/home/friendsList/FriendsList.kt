@@ -28,6 +28,8 @@ import androidx.navigation.NavController
 import com.example.navtestapp.R
 import com.example.navtestapp.Screen
 
+const val HOME_NAV_GRAPH_ROUTE = "home_navigation_graph_route"
+
 @Composable
 fun FriendsList(
     navController: NavController,
@@ -79,7 +81,13 @@ fun FriendsList(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { navController.popBackStack() },
+            onClick = {
+                navController.navigate(Screen.LoginScreen.route) {
+                    popUpTo(HOME_NAV_GRAPH_ROUTE) {
+                        inclusive = true
+                    }
+                }
+            },
             colors = ButtonDefaults.buttonColors(Color.Red),
             modifier = Modifier
                 .clip(shape = RectangleShape)

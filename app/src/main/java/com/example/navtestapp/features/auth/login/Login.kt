@@ -42,6 +42,8 @@ import com.example.navtestapp.Screen
 import com.example.navtestapp.components.TabComponent
 import com.example.navtestapp.components.TabRowComponent
 
+const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
+
 @Composable
 fun Login(
     navController: NavController
@@ -146,7 +148,13 @@ fun Login(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { navController.navigate(Screen.FriendsListScreen.route + "?email=$email") },
+            onClick = {
+                navController.navigate(Screen.FriendsListScreen.route + "?email=$email") {
+                    popUpTo(AUTH_NAV_GRAPH_ROUTE) {
+                        inclusive = true
+                    }
+                }
+            },
             modifier = Modifier
                 .clip(shape = RectangleShape)
                 .fillMaxWidth()
