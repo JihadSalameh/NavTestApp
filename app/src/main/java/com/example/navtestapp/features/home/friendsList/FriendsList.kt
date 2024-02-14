@@ -12,7 +12,10 @@ import androidx.navigation.NavController
 import com.example.navtestapp.Screen
 
 @Composable
-fun FriendsList(navController: NavController, name: String?) {
+fun FriendsList(
+    navController: NavController,
+    name: String?
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()

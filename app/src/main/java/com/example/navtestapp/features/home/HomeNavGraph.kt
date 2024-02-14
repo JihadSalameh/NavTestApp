@@ -9,14 +9,14 @@ import com.example.navtestapp.features.home.profile.profileScreenNavigation
 
 const val HOME_NAV_GRAPH_ROUTE = "home_navigation_graph_route"
 
-fun NavGraphBuilder.homeNavGraph(navController: NavController) {
-
+fun NavGraphBuilder.homeNavGraph(
+    navController: NavController
+) {
     navigation(
-            startDestination = Screen.FriendsListScreen.route,
-            route = HOME_NAV_GRAPH_ROUTE
-        ) {
-            friendsListScreenNavigation(navController)
-            profileScreenNavigation(navController)
-        }
-
+        startDestination = Screen.FriendsListScreen.route,
+        route = HOME_NAV_GRAPH_ROUTE
+    ) {
+        friendsListScreenNavigation(navController)
+        profileScreenNavigation(navController)
+    }
 }

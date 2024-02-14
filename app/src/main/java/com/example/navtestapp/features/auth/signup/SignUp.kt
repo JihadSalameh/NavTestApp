@@ -15,8 +15,9 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -41,7 +42,9 @@ import com.example.navtestapp.components.TabComponent
 import com.example.navtestapp.components.TabRowComponent
 
 @Composable
-fun SignUp(navController: NavController) {
+fun SignUp(
+    navController: NavController
+) {
     var username by remember {
         mutableStateOf("")
     }
@@ -92,7 +95,7 @@ fun SignUp(navController: NavController) {
         }
         Spacer(modifier = Modifier.padding(10.dp))
         if(selectedTab == 0) {
-            TextField(
+            OutlinedTextField(
                 value = username,
                 onValueChange = { temp ->
                     username = temp
@@ -106,10 +109,11 @@ fun SignUp(navController: NavController) {
                 },
                 leadingIcon = {
                     Icon(painter = painterResource(id = R.drawable.baseline_account_circle_24), contentDescription = "UserName")
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = Color.White, unfocusedTextColor = Color.White)
             )
             Spacer(modifier = Modifier.padding(10.dp))
-            TextField(
+            OutlinedTextField(
                 value = email,
                 onValueChange = { temp ->
                     email = temp
@@ -123,10 +127,11 @@ fun SignUp(navController: NavController) {
                 },
                 leadingIcon = {
                     Icon(painter = painterResource(id = R.drawable.baseline_email_24), contentDescription = "Email")
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = Color.White, unfocusedTextColor = Color.White)
             )
             Spacer(modifier = Modifier.padding(10.dp))
-            TextField(
+            OutlinedTextField(
                 value = password,
                 onValueChange = {temp ->
                     password = temp
@@ -141,10 +146,11 @@ fun SignUp(navController: NavController) {
                 visualTransformation = PasswordVisualTransformation(),
                 leadingIcon = {
                     Icon(painter = painterResource(id = R.drawable.baseline_lock_24), contentDescription = "Password")
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = Color.White, unfocusedTextColor = Color.White)
             )
             Spacer(modifier = Modifier.padding(10.dp))
-            TextField(
+            OutlinedTextField(
                 value = confirmPassword,
                 onValueChange = {temp ->
                     confirmPassword = temp
@@ -159,10 +165,11 @@ fun SignUp(navController: NavController) {
                 visualTransformation = PasswordVisualTransformation(),
                 leadingIcon = {
                     Icon(painter = painterResource(id = R.drawable.baseline_lock_24), contentDescription = "Confirm Password")
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = Color.White, unfocusedTextColor = Color.White)
             )
         } else {
-            TextField(
+            OutlinedTextField(
                 value = phoneNumber,
                 onValueChange = { temp ->
                     phoneNumber = temp
@@ -176,7 +183,8 @@ fun SignUp(navController: NavController) {
                 },
                 leadingIcon = {
                     Icon(painter = painterResource(id = R.drawable.baseline_numpad_24), contentDescription = "Phone Number")
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = Color.White, unfocusedTextColor = Color.White)
             )
         }
         Spacer(modifier = Modifier.padding(10.dp))

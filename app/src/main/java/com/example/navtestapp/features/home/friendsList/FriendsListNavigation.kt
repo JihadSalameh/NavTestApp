@@ -7,17 +7,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.navtestapp.Screen
 
-fun NavGraphBuilder.friendsListScreenNavigation(navController: NavController) {
+fun NavGraphBuilder.friendsListScreenNavigation(
+    navController: NavController
+) {
     composable(
-        route = Screen.FriendsListScreen.route + "/{name}",
+        route = Screen.FriendsListScreen.route + "/{email}",
         arguments = listOf(
-            navArgument("name") {
+            navArgument("email") {
                 nullable = true
-                defaultValue = "Jihad"
+                defaultValue = "Jihad@gmail.com"
                 type = NavType.StringType
             }
         )
     ) {entry ->
-        FriendsList(navController = navController, entry.arguments?.getString("name"))
+        FriendsList(navController = navController, entry.arguments?.getString("email"))
     }
 }

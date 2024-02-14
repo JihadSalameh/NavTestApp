@@ -12,7 +12,6 @@ const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
 fun NavGraphBuilder.authNavGraph(
     navController: NavController
 ){
-
     navigation(
         startDestination = Screen.LoginScreen.route,
         route = AUTH_NAV_GRAPH_ROUTE

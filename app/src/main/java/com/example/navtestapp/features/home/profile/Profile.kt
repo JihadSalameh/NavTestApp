@@ -11,7 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
-fun Profile(navController: NavController) {
+fun Profile(
+    navController: NavController
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
