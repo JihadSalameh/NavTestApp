@@ -79,7 +79,7 @@ fun FriendsList(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { navController.navigate(Screen.LoginScreen.route) },
+            onClick = { navController.popBackStack() },
             colors = ButtonDefaults.buttonColors(Color.Red),
             modifier = Modifier
                 .clip(shape = RectangleShape)

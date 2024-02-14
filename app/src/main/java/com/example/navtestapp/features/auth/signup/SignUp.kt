@@ -209,7 +209,7 @@ fun SignUp(
             Text(
                 text = "Login",
                 Modifier.clickable {
-                    navController.navigate(Screen.LoginScreen.route)
+                    navController.popBackStack()
                 },
                 color = Color.Red,
                 fontSize = 20.sp,

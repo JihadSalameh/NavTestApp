@@ -13,6 +13,7 @@ fun AppNav() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
+
         startDestination = AUTH_NAV_GRAPH_ROUTE
     ) {
         authNavGraph(navController)
