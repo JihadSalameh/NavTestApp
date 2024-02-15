@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.example.navtestapp.Screen
 import com.example.navtestapp.model.User
 
@@ -44,6 +43,7 @@ fun CardComponent(user: User, navController: NavController) {
                 painter = painterResource(user.imageResourceId),
                 contentDescription = stringResource(user.stringResourceId),
                 modifier = Modifier
+                    .padding(8.dp)
                     .size(120.dp)
                     .clip(CircleShape),
             )

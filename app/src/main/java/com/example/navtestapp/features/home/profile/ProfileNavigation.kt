@@ -1,5 +1,7 @@
 package com.example.navtestapp.features.home.profile
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -17,7 +19,17 @@ fun NavGraphBuilder.profileScreenNavigation(
                 nullable = false
                 type = NavType.IntType
             }
-        )
+        ),
+        enterTransition = {
+            return@composable slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Start, tween(500)
+            )
+        },
+        exitTransition = {
+            return@composable slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.End, tween(500)
+            )
+        }
     ) {entry ->
         Profile(navController = navController, entry.arguments?.getInt("name"))
     }
