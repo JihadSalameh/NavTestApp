@@ -1,5 +1,6 @@
 package com.example.navtestapp.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -37,7 +38,8 @@ fun CardComponent(
                 navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}")
             },
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceVariant),
-        elevation = CardDefaults.cardElevation(12.dp)
+        elevation = CardDefaults.cardElevation(12.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth()
