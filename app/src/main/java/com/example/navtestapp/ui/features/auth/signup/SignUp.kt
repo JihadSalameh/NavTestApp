@@ -13,6 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -32,17 +37,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.navtestapp.R
-import com.example.navtestapp.ui.features.Screen
 import com.example.navtestapp.ui.components.TabComponent
 import com.example.navtestapp.ui.components.TabRowComponent
+import com.example.navtestapp.ui.features.Screen
 
 const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
 
@@ -118,7 +121,7 @@ fun SignUp(
                         Text(text = "UserName")
                     },
                     leadingIcon = {
-                        Icon(painter = painterResource(id = R.drawable.baseline_account_circle_24), contentDescription = "UserName")
+                        Icon(imageVector = Icons.Default.Person, contentDescription = null)
                     },
                     colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
                 )
@@ -136,7 +139,7 @@ fun SignUp(
                         Text(text = "Email")
                     },
                     leadingIcon = {
-                        Icon(painter = painterResource(id = R.drawable.baseline_email_24), contentDescription = "Email")
+                        Icon(imageVector = Icons.Default.Email, contentDescription = null)
                     },
                     colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
                 )
@@ -155,7 +158,7 @@ fun SignUp(
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     leadingIcon = {
-                        Icon(painter = painterResource(id = R.drawable.baseline_lock_24), contentDescription = "Password")
+                        Icon(imageVector = Icons.Default.Lock, contentDescription = null)
                     },
                     colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
                 )
@@ -174,7 +177,7 @@ fun SignUp(
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     leadingIcon = {
-                        Icon(painter = painterResource(id = R.drawable.baseline_lock_24), contentDescription = "Confirm Password")
+                        Icon(imageVector = Icons.Default.Lock, contentDescription = null)
                     },
                     colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
                 )
@@ -193,7 +196,7 @@ fun SignUp(
                         Text(text = "Phone Number")
                     },
                     leadingIcon = {
-                        Icon(painter = painterResource(id = R.drawable.baseline_numpad_24), contentDescription = "Phone Number")
+                        Icon(imageVector = Icons.Default.Phone, contentDescription = null)
                     },
                     colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
                 )
