@@ -54,12 +54,12 @@ fun TabRowComponent(
         modifier = modifier,
         tabs = tabs,
         containerColor = Color.Transparent,
-        contentColor = Color.Red,
+        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         indicator = { tabPositions ->
             TabRowDefaults.Indicator(
                 modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
                 height = 2.dp,
-                color = Color.Red,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
         }
     )
