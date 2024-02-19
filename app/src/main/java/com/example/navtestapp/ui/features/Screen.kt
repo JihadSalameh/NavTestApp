@@ -1,4 +1,4 @@
-package com.example.navtestapp
+package com.example.navtestapp.ui.features
 
 sealed class Screen(
     val route: String

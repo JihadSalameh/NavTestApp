@@ -1,9 +1,9 @@
-package com.example.navtestapp.features.auth.signup
+package com.example.navtestapp.ui.features.auth.signup
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.navtestapp.Screen
+import com.example.navtestapp.ui.features.Screen
 
 fun NavGraphBuilder.signupScreenNavigation(
     navController: NavController

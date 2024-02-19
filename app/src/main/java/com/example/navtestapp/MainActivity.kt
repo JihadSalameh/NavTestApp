@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.navtestapp.ui.features.AppNav
 import com.example.navtestapp.ui.theme.NavTestAppTheme
 
 class MainActivity : ComponentActivity() {

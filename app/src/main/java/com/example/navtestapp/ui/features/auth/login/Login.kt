@@ -1,4 +1,4 @@
-package com.example.navtestapp.features.auth.login
+package com.example.navtestapp.ui.features.auth.login
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -38,9 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.navtestapp.R
-import com.example.navtestapp.Screen
-import com.example.navtestapp.components.TabComponent
-import com.example.navtestapp.components.TabRowComponent
+import com.example.navtestapp.ui.features.Screen
+import com.example.navtestapp.ui.components.TabComponent
+import com.example.navtestapp.ui.components.TabRowComponent
 
 const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
 

@@ -1,11 +1,11 @@
-package com.example.navtestapp.features.auth
+package com.example.navtestapp.ui.features.auth
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
-import com.example.navtestapp.Screen
-import com.example.navtestapp.features.auth.login.loginScreenNavigation
-import com.example.navtestapp.features.auth.signup.signupScreenNavigation
+import com.example.navtestapp.ui.features.Screen
+import com.example.navtestapp.ui.features.auth.login.loginScreenNavigation
+import com.example.navtestapp.ui.features.auth.signup.signupScreenNavigation
 
 const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
 

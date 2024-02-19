@@ -1,11 +1,11 @@
-package com.example.navtestapp.features.home.friendsList
+package com.example.navtestapp.ui.features.home.friendsList
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.navtestapp.Screen
+import com.example.navtestapp.ui.features.Screen
 
 fun NavGraphBuilder.friendsListScreenNavigation(
     navController: NavController
