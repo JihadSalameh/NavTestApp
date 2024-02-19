@@ -47,19 +47,20 @@ fun FriendsList(
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.surface),
     ) {
         Scaffold(
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {  },
                     modifier = Modifier
-                        .clip(CircleShape)
+                        .clip(CircleShape),
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                 ) {
                     Icon(
                         imageVector = Icons.Default.AccountCircle,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
             }
@@ -110,12 +111,12 @@ fun FriendsList(
                                 }
                             }
                         },
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimaryContainer),
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                         modifier = Modifier
                             .clip(shape = RectangleShape)
                             .padding(16.dp, 0.dp, 16.dp, 0.dp)
                     ) {
-                        Text(text = "logout")
+                        Text(text = "logout", color = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
                 Spacer(modifier = Modifier.padding(10.dp))

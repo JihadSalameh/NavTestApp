@@ -21,14 +21,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.navtestapp.ui.features.Screen
 import com.example.navtestapp.model.User
+import com.example.navtestapp.ui.features.Screen
 
 @Composable
 fun CardComponent(user: User, navController: NavController) {
     Card(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(8.dp, 8.dp, 8.dp, 0.dp)
             .fillMaxWidth()
             .clickable {
                 navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}")
@@ -49,7 +49,7 @@ fun CardComponent(user: User, navController: NavController) {
             Text(
                 text = stringResource(user.stringResourceId),
                 modifier = Modifier
-                    .padding(10.dp),
+                    .padding(10.dp, 40.dp, 0.dp, 0.dp),
                 style = MaterialTheme.typography.displayMedium,
                 fontSize = 40.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant

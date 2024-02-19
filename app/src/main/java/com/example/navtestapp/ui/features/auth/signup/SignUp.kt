@@ -73,7 +73,7 @@ fun SignUp(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.surface),
     ) {values ->
         Column(
             modifier = Modifier
@@ -211,9 +211,9 @@ fun SignUp(
                     .clip(shape = RectangleShape)
                     .fillMaxWidth()
                     .padding(16.dp, 0.dp, 16.dp, 0.dp),
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimaryContainer)
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
-                Text(text = "Signup", fontSize = 25.sp)
+                Text(text = "Signup", fontSize = 25.sp, color = MaterialTheme.colorScheme.onPrimary)
             }
             Spacer(modifier = Modifier.padding(10.dp))
             Row(

@@ -31,7 +31,7 @@ fun Profile(
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.surface),
     ) {
         Column(
             modifier = Modifier
@@ -52,12 +52,12 @@ fun Profile(
             Spacer(modifier = Modifier.padding(10.dp))
             Button(
                 onClick = { navController.popBackStack() },
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimaryContainer),
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 modifier = Modifier
                     .clip(shape = RectangleShape)
                     .padding(16.dp, 0.dp, 16.dp, 0.dp)
             ) {
-                Text(text = "Back")
+                Text(text = "Back", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }
