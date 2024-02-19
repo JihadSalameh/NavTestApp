@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,15 +25,19 @@ import com.example.navtestapp.model.User
 import com.example.navtestapp.ui.features.Screen
 
 @Composable
-fun CardComponent(user: User, navController: NavController) {
-    Card(
+fun CardComponent(
+    user: User,
+    navController: NavController
+) {
+    OutlinedCard(
         modifier = Modifier
-            .padding(8.dp, 8.dp, 8.dp, 0.dp)
+            .padding(8.dp, 4.dp, 8.dp, 4.dp)
             .fillMaxWidth()
             .clickable {
                 navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}")
             },
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceVariant),
+        elevation = CardDefaults.cardElevation(12.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth()
