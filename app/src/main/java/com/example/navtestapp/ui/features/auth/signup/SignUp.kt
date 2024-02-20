@@ -91,7 +91,11 @@ fun SignUp(
                         selected = selectedTab == index,
                         onClick = { selectedTab = index },
                         text = {
-                            Text(text = title)
+                            if(selectedTab == index) {
+                                Text(text = title, color = MaterialTheme.colorScheme.primary)
+                            } else {
+                                Text(text = title, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
                         }
                     )
                 }
@@ -167,7 +171,7 @@ fun SignUp(
                     Modifier.clickable {
                         navController.popBackStack()
                     },
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = MaterialTheme.colorScheme.primary,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )

@@ -80,7 +80,11 @@ fun Login(
                         selected = selectedTab == index,
                         onClick = { selectedTab = index },
                         text = {
-                            Text(text = title)
+                            if(selectedTab == index) {
+                                Text(text = title, color = MaterialTheme.colorScheme.primary)
+                            } else {
+                                Text(text = title, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
                         }
                     )
                 }
@@ -138,7 +142,7 @@ fun Login(
                     Modifier.clickable {
                         navController.navigate(Screen.SignUpScreen.route)
                     },
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = MaterialTheme.colorScheme.primary,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -151,7 +155,7 @@ fun Login(
                         .clickable {
                             Log.d("test", "Hello World")
                         },
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
             }
