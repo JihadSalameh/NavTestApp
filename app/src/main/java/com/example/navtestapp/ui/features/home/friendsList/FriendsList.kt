@@ -20,6 +20,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +42,9 @@ fun FriendsList(
     navController: NavController,
     name: String?
 ) {
+    val temp = remember {
+        Datasource().loadUsers().toMutableStateList()
+    }
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -105,7 +110,7 @@ fun FriendsList(
                 }
                 Spacer(modifier = Modifier.padding(10.dp))
                 Divider(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onBackground)
-                UserList(users = Datasource().loadUsers(), navController = navController)
+                UserList(users = temp, navController = navController)
             }
         }
     }

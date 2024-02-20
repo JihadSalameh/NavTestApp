@@ -65,10 +65,20 @@ fun CardComponent(
 }
 
 @Composable
-fun UserList(users: List<User>, navController: NavController) {
+fun UserList(users: MutableList<User>, navController: NavController) {
     LazyColumn {
-        items(users) {user ->
-            CardComponent(user, navController)
+        items(
+            items = users,
+            key = { it.stringResourceId }
+        ) {user ->
+            SwipeToDeleteContainer(
+                item = user,
+                onSwipe = {
+                    users -= user
+                }
+            ) { user1 ->
+                CardComponent(user = user1, navController = navController)
+            }
         }
     }
 }
