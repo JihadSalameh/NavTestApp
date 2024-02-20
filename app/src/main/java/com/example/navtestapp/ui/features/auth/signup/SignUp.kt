@@ -1,7 +1,6 @@
 package com.example.navtestapp.ui.features.auth.signup
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +17,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -165,16 +165,21 @@ fun SignUp(
                     .wrapContentWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Already have an account? ", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground)
                 Text(
-                    text = "Login",
-                    Modifier.clickable {
-                        navController.popBackStack()
-                    },
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    text = "Already have an account? ",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
+                TextButton(
+                    onClick = { navController.popBackStack() }
+                ) {
+                    Text(
+                        text = "Login",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
     }

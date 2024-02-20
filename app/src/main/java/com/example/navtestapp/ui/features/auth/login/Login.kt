@@ -1,8 +1,6 @@
 package com.example.navtestapp.ui.features.auth.login
 
-import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +16,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -137,27 +136,26 @@ fun Login(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(text = "Don't have an account? ", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground)
-                Text(
-                    text = "Sign Up",
-                    Modifier.clickable {
-                        navController.navigate(Screen.SignUpScreen.route)
-                    },
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                TextButton(
+                    onClick = { navController.navigate(Screen.SignUpScreen.route) }
+                ) {
+                    Text(
+                        text = "Sign Up",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
             if(selectedTab == 0) {
                 Spacer(modifier = Modifier.padding(10.dp))
-                Text(
-                    text = "Forgot Password?",
-                    Modifier
-                        .clickable {
-                            Log.d("test", "Hello World")
-                        },
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold
-                )
+                TextButton(onClick = {  }) {
+                    Text(
+                        text = "Forgot Password?",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
     }
