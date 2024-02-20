@@ -9,13 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -27,15 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.navtestapp.R
-import com.example.navtestapp.ui.features.Screen
-import com.example.navtestapp.ui.components.UserList
 import com.example.navtestapp.data.Datasource
+import com.example.navtestapp.ui.components.AppButton
+import com.example.navtestapp.ui.components.HeaderTextComponent
+import com.example.navtestapp.ui.components.UserList
+import com.example.navtestapp.ui.features.Screen
 
 const val HOME_NAV_GRAPH_ROUTE = "home_navigation_graph_route"
 
@@ -71,14 +67,7 @@ fun FriendsList(
                     .padding(values),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .wrapContentWidth(),
-                    text = "Friends List",
-                    fontSize = 26.sp,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                HeaderTextComponent(name = "Friends List")
                 Spacer(modifier = Modifier.padding(10.dp))
                 Column(
                     modifier = Modifier,
@@ -103,21 +92,16 @@ fun FriendsList(
                         Spacer(modifier = Modifier.padding(5.dp))
                         Text(text = "Hello, $name", color = MaterialTheme.colorScheme.onBackground)
                     }
-                    Button(
-                        onClick = {
+                    AppButton(
+                        change = {
                             navController.navigate(Screen.LoginScreen.route) {
                                 popUpTo(HOME_NAV_GRAPH_ROUTE) {
                                     inclusive = true
                                 }
                             }
                         },
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-                        modifier = Modifier
-                            .clip(shape = RectangleShape)
-                            .padding(16.dp, 0.dp, 16.dp, 0.dp)
-                    ) {
-                        Text(text = "logout", color = MaterialTheme.colorScheme.onPrimary)
-                    }
+                        lbl = "logout"
+                    )
                 }
                 Spacer(modifier = Modifier.padding(10.dp))
                 Divider(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onBackground)

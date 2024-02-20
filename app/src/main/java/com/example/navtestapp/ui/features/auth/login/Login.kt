@@ -7,23 +7,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,17 +27,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.navtestapp.ui.features.Screen
+import com.example.navtestapp.ui.components.AuthButton
+import com.example.navtestapp.ui.components.AuthTextField
+import com.example.navtestapp.ui.components.HeaderTextComponent
+import com.example.navtestapp.ui.components.PasswordTextField
+import com.example.navtestapp.ui.components.PhoneNumberTextField
 import com.example.navtestapp.ui.components.TabComponent
 import com.example.navtestapp.ui.components.TabRowComponent
+import com.example.navtestapp.ui.features.Screen
 
 const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
 
@@ -79,14 +72,7 @@ fun Login(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .wrapContentWidth(),
-                text = "Login",
-                fontSize = 26.sp,
-                color = MaterialTheme.colorScheme.onBackground
-            )
+            HeaderTextComponent(name = "Login")
             Spacer(modifier = Modifier.padding(10.dp))
             TabRowComponent(modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 0.dp), selectedTabIndex = selectedTab) {
                 tiles.forEachIndexed {index, title ->
@@ -101,79 +87,44 @@ fun Login(
             }
             Spacer(modifier = Modifier.padding(10.dp))
             if(selectedTab == 0) {
-                OutlinedTextField(
-                    value = email,
-                    onValueChange = {temp ->
+                AuthTextField(
+                    val1 = email,
+                    change = {temp ->
                         email = temp
                     },
-                    Modifier
-                        .clip(shape = RectangleShape)
-                        .fillMaxWidth()
-                        .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
-                    placeholder = {
-                        Text(text = "Email")
-                    },
-                    leadingIcon = {
-                        Icon(imageVector = Icons.Default.Email, contentDescription = null)
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
+                    placeHolder = "Email",
+                    imageVector = Icons.Default.Email
                 )
                 Spacer(modifier = Modifier.padding(10.dp))
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = {temp ->
+                PasswordTextField(
+                    val1 = password,
+                    change = {temp ->
                         password = temp
                     },
-                    Modifier
-                        .clip(shape = RectangleShape)
-                        .fillMaxWidth()
-                        .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
-                    placeholder = {
-                        Text(text = "Password")
-                    },
-                    visualTransformation = PasswordVisualTransformation(),
-                    leadingIcon = {
-                        Icon(imageVector = Icons.Default.Lock, contentDescription = null)
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
+                    placeHolder = "Password",
+                    imageVector = Icons.Default.Lock
                 )
             } else {
-                OutlinedTextField(
-                    value = phoneNumber,
-                    onValueChange = { temp ->
+                PhoneNumberTextField(
+                    val1 = phoneNumber,
+                    change = { temp ->
                         phoneNumber = temp
                     },
-                    Modifier
-                        .clip(shape = RectangleShape)
-                        .fillMaxWidth()
-                        .absolutePadding(16.dp, 0.dp, 16.dp, 0.dp),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    placeholder = {
-                        Text(text = "Phone Number")
-                    },
-                    leadingIcon = {
-                        Icon(imageVector = Icons.Default.Phone, contentDescription = null)
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
+                    placeHolder = "Phone Number",
+                    imageVector = Icons.Default.Phone
                 )
             }
             Spacer(modifier = Modifier.padding(10.dp))
-            Button(
-                onClick = {
+            AuthButton(
+                change = {
                     navController.navigate(Screen.FriendsListScreen.route + "?email=$email") {
                         popUpTo(AUTH_NAV_GRAPH_ROUTE) {
                             inclusive = true
                         }
                     }
                 },
-                modifier = Modifier
-                    .clip(shape = RectangleShape)
-                    .fillMaxWidth()
-                    .padding(16.dp, 0.dp, 16.dp, 0.dp),
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
-            ) {
-                Text(text = "Login", fontSize = 25.sp, color = MaterialTheme.colorScheme.onPrimary)
-            }
+                lbl = "Login"
+            )
             Spacer(modifier = Modifier.padding(10.dp))
             Row(
                 modifier = Modifier
