@@ -34,9 +34,11 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
@@ -72,6 +74,9 @@ fun FriendsList(
         initialValue = DrawerValue.Closed
     )
     val scope = rememberCoroutineScope()
+    var selectedNavItemIndex by rememberSaveable {
+        mutableIntStateOf(0)
+    }
 
     if(viewAlert) {
         AlertDialogComponent(
@@ -95,24 +100,33 @@ fun FriendsList(
                     HeaderTextComponent(name = "NavTestApp")
                     NavigationDrawerItem(
                         label = { Text(text = "Profile") },
-                        selected = false,
-                        onClick = { Log.d("profile", "This is your profile") },
+                        selected = selectedNavItemIndex == 0,
+                        onClick = {
+                            selectedNavItemIndex = 0
+                            Log.d("profile", "This is your profile")
+                        },
                         icon = {
                             Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
                         }
                     )
                     NavigationDrawerItem(
                         label = { Text(text = "Settings") },
-                        selected = false,
-                        onClick = { Log.d("Settings", "This is the Settings") },
+                        selected = selectedNavItemIndex == 1,
+                        onClick = {
+                            selectedNavItemIndex = 1
+                            Log.d("Settings", "This is the Settings")
+                        },
                         icon = {
                             Icon(imageVector = Icons.Default.Settings, contentDescription = null)
                         }
                     )
                     NavigationDrawerItem(
                         label = { Text(text = "About Us") },
-                        selected = false,
-                        onClick = { Log.d("About Us", "This is About Us") },
+                        selected = selectedNavItemIndex == 2,
+                        onClick = {
+                            selectedNavItemIndex = 2
+                            Log.d("About Us", "This is About Us")
+                        },
                         icon = {
                             Icon(imageVector = Icons.Default.Info, contentDescription = null)
                         }
