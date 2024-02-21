@@ -1,5 +1,6 @@
 package com.example.navtestapp.ui.components
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
@@ -15,6 +16,8 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -245,4 +248,27 @@ fun <T> SwipeToDeleteContainer(
             directions = setOf(DismissDirection.EndToStart)
         )
     }
+}
+
+@Composable
+fun AlertDialogComponent(
+    title: String,
+    body: String,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            AppButton(change = { Log.d("Alert", "test test") }, lbl = "Share")
+        },
+        icon = {
+            Icon(imageVector = Icons.Default.Info, contentDescription = null)
+        },
+        title = {
+            Text(text = title, fontSize = 20.sp)
+        },
+        text = {
+            Text(text = body)
+        }
+    )
 }

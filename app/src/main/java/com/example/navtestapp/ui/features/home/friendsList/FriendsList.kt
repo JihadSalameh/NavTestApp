@@ -20,7 +20,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.navtestapp.R
 import com.example.navtestapp.data.Datasource
+import com.example.navtestapp.ui.components.AlertDialogComponent
 import com.example.navtestapp.ui.components.AppButton
 import com.example.navtestapp.ui.components.HeaderTextComponent
 import com.example.navtestapp.ui.components.UserList
@@ -45,6 +49,20 @@ fun FriendsList(
     val temp = remember {
         Datasource().loadUsers().toMutableStateList()
     }
+    var viewAlert by remember {
+        mutableStateOf(false)
+    }
+
+    if(viewAlert) {
+        AlertDialogComponent(
+            title = "Share Profile",
+            body = "share your profile with other users to become friends",
+            onDismiss = {
+                viewAlert = false
+            }
+        )
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -53,9 +71,9 @@ fun FriendsList(
         Scaffold(
             floatingActionButton = {
                 FloatingActionButton(
-                    onClick = {  },
-                    modifier = Modifier
-                        .clip(CircleShape),
+                    onClick = {
+                        viewAlert = true
+                    },
                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
                     contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                 ) {
