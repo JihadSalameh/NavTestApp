@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -46,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.navtestapp.R
 import com.example.navtestapp.data.Datasource
@@ -97,7 +100,17 @@ fun FriendsList(
             drawerState = drawerState,
             drawerContent = {
                 ModalDrawerSheet {
-                    HeaderTextComponent(name = "NavTestApp")
+                    Spacer(modifier = Modifier.padding(16.dp))
+                    Text(
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .wrapContentWidth()
+                            .padding(start = 10.dp),
+                        text = "NavTestApp",
+                        fontSize = 26.sp,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                    Spacer(modifier = Modifier.padding(16.dp))
                     NavigationDrawerItem(
                         label = { Text(text = "Profile") },
                         selected = selectedNavItemIndex == 0,
