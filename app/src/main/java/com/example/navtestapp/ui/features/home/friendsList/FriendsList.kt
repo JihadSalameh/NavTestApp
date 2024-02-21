@@ -1,5 +1,6 @@
 package com.example.navtestapp.ui.features.home.friendsList
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,17 +13,30 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
@@ -38,9 +52,11 @@ import com.example.navtestapp.ui.components.AppButton
 import com.example.navtestapp.ui.components.HeaderTextComponent
 import com.example.navtestapp.ui.components.UserList
 import com.example.navtestapp.ui.features.Screen
+import kotlinx.coroutines.launch
 
 const val HOME_NAV_GRAPH_ROUTE = "home_navigation_graph_route"
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FriendsList(
     navController: NavController,
@@ -52,6 +68,10 @@ fun FriendsList(
     var viewAlert by remember {
         mutableStateOf(false)
     }
+    val drawerState = rememberDrawerState(
+        initialValue = DrawerValue.Closed
+    )
+    val scope = rememberCoroutineScope()
 
     if(viewAlert) {
         AlertDialogComponent(
@@ -68,67 +88,126 @@ fun FriendsList(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surface),
     ) {
-        Scaffold(
-            floatingActionButton = {
-                FloatingActionButton(
-                    onClick = {
-                        viewAlert = true
-                    },
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.AccountCircle,
-                        contentDescription = null,
+        ModalNavigationDrawer(
+            drawerState = drawerState,
+            drawerContent = {
+                ModalDrawerSheet {
+                    HeaderTextComponent(name = "NavTestApp")
+                    NavigationDrawerItem(
+                        label = { Text(text = "Profile") },
+                        selected = false,
+                        onClick = { Log.d("profile", "This is your profile") },
+                        icon = {
+                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+                        }
+                    )
+                    NavigationDrawerItem(
+                        label = { Text(text = "Settings") },
+                        selected = false,
+                        onClick = { Log.d("Settings", "This is the Settings") },
+                        icon = {
+                            Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        }
+                    )
+                    NavigationDrawerItem(
+                        label = { Text(text = "About Us") },
+                        selected = false,
+                        onClick = { Log.d("About Us", "This is About Us") },
+                        icon = {
+                            Icon(imageVector = Icons.Default.Info, contentDescription = null)
+                        }
                     )
                 }
-            }
-        ) { values ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(values),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                HeaderTextComponent(name = "Friends List")
-                Spacer(modifier = Modifier.padding(10.dp))
-                Column(
-                    modifier = Modifier,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.End)
-                            .padding(0.dp, 10.dp, 0.dp, 0.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(text = "Profile", color = MaterialTheme.colorScheme.onBackground)
-                        Spacer(modifier = Modifier.padding(10.dp))
-                        Image(
-                            modifier = Modifier
-                                .size(90.dp)
-                                .clip(CircleShape),
-                            painter = painterResource(id = R.drawable.profilepic),
-                            contentDescription = "Profile Picture",
-                        )
-                        Spacer(modifier = Modifier.padding(5.dp))
-                        Text(text = "Hello, $name", color = MaterialTheme.colorScheme.onBackground)
-                    }
-                    AppButton(
-                        change = {
-                            navController.navigate(Screen.LoginScreen.route) {
-                                popUpTo(HOME_NAV_GRAPH_ROUTE) {
-                                    inclusive = true
+            },
+            gesturesEnabled = true
+        ) {
+            Scaffold(
+                topBar = {
+                    CenterAlignedTopAppBar(
+                        title = {
+                            HeaderTextComponent(name = "Friends List")
+                        },
+                        navigationIcon = {
+                            IconButton(onClick = {
+                                scope.launch {
+                                    drawerState.apply {
+                                        if (isClosed) open() else close()
+                                    }
                                 }
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Default.Menu,
+                                    contentDescription = null
+                                )
                             }
                         },
-                        lbl = "logout"
+                        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.surface,
+                            navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
+                            titleContentColor = MaterialTheme.colorScheme.onSurface
+                        )
                     )
+                },
+                floatingActionButton = {
+                    FloatingActionButton(
+                        onClick = {
+                            viewAlert = true
+                        },
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = null,
+                        )
+                    }
                 }
-                Spacer(modifier = Modifier.padding(10.dp))
-                Divider(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onBackground)
-                UserList(users = temp, navController = navController)
+            ) { values ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(values),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Column(
+                        modifier = Modifier,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.End)
+                                .padding(0.dp, 10.dp, 0.dp, 0.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "Profile", color = MaterialTheme.colorScheme.onBackground)
+                            Spacer(modifier = Modifier.padding(10.dp))
+                            Image(
+                                modifier = Modifier
+                                    .size(90.dp)
+                                    .clip(CircleShape),
+                                painter = painterResource(id = R.drawable.profilepic),
+                                contentDescription = "Profile Picture",
+                            )
+                            Spacer(modifier = Modifier.padding(5.dp))
+                            Text(text = "Hello, $name", color = MaterialTheme.colorScheme.onBackground)
+                        }
+                        AppButton(
+                            change = {
+                                navController.navigate(Screen.LoginScreen.route) {
+                                    popUpTo(HOME_NAV_GRAPH_ROUTE) {
+                                        inclusive = true
+                                    }
+                                }
+                            },
+                            lbl = "logout"
+                        )
+                    }
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Divider(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onBackground)
+                    UserList(users = temp, navController = navController)
+                }
             }
         }
     }
