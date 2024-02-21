@@ -5,12 +5,10 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,14 +18,14 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DismissDirection
 import androidx.compose.material3.DismissState
 import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.SwipeToDismiss
@@ -183,24 +181,37 @@ fun DeleteBackground(
         Color.Transparent
     }
 
-    OutlinedCard(
-        modifier = Modifier
-            .padding(8.dp, 4.dp, 8.dp, 4.dp)
-            .fillMaxSize(),
-        colors = CardDefaults.cardColors(color),
-        elevation = CardDefaults.cardElevation(12.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
-    ) {
-        Icon(
-            imageVector = Icons.Default.Delete,
-            contentDescription = null,
-            tint = Color.White,
-            modifier = Modifier
-                .align(Alignment.End)
-                .padding(top = 55.dp, end = 10.dp)
-                .size(30.dp)
-        )
-    }
+    ListItem(
+        headlineContent = {},
+        colors = ListItemDefaults.colors(containerColor = color),
+        trailingContent = {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+                tint = Color.White,
+            )
+        },
+        modifier = Modifier.fillMaxSize()
+    )
+
+//    OutlinedCard(
+//        modifier = Modifier
+//            .padding(8.dp, 4.dp, 8.dp, 4.dp)
+//            .fillMaxSize(),
+//        colors = CardDefaults.cardColors(color),
+//        elevation = CardDefaults.cardElevation(12.dp),
+//        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+//    ) {
+//        Icon(
+//            imageVector = Icons.Default.Delete,
+//            contentDescription = null,
+//            tint = Color.White,
+//            modifier = Modifier
+//                .align(Alignment.End)
+//                .padding(top = 55.dp, end = 10.dp)
+//                .size(30.dp)
+//        )
+//    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

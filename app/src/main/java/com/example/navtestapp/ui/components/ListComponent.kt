@@ -1,18 +1,16 @@
 package com.example.navtestapp.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,38 +28,34 @@ fun CardComponent(
     user: User,
     navController: NavController
 ) {
-    OutlinedCard(
+    ListItem(
         modifier = Modifier
-            .padding(8.dp, 4.dp, 8.dp, 4.dp)
             .fillMaxWidth()
-            .clickable {
-                navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}")
-            },
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceVariant),
-        elevation = CardDefaults.cardElevation(12.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
+            .clickable { navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}") },
+        headlineContent = {
+            Text(
+                text = stringResource(user.stringResourceId),
+                style = MaterialTheme.typography.displayMedium,
+                fontSize = 40.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        leadingContent = {
             Image(
                 painter = painterResource(user.imageResourceId),
                 contentDescription = stringResource(user.stringResourceId),
                 modifier = Modifier
                     .padding(8.dp)
-                    .size(120.dp)
+                    .size(100.dp)
                     .clip(CircleShape),
             )
-            Text(
-                text = stringResource(user.stringResourceId),
-                modifier = Modifier
-                    .padding(10.dp, 40.dp, 0.dp, 0.dp),
-                style = MaterialTheme.typography.displayMedium,
-                fontSize = 40.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-    }
+        },
+        colors = ListItemDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            headlineColor = MaterialTheme.colorScheme.onSurface,
+
+        )
+    )
 }
 
 @Composable
