@@ -7,9 +7,7 @@ import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.navtestapp.ui.features.AppNav
 import com.example.navtestapp.ui.theme.NavTestAppTheme
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: MyViewModel by viewModels()
 
