@@ -2,7 +2,6 @@ package com.example.navtestapp.ui.features.home.profile
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -10,7 +9,7 @@ import androidx.navigation.navArgument
 import com.example.navtestapp.ui.features.Screen
 
 fun NavGraphBuilder.profileScreenNavigation(
-    navController: NavController
+    goToFriendsListScreen: () -> Unit
 ) {
     composable(
         route = Screen.ProfileScreen.route + "/{name}",
@@ -31,6 +30,9 @@ fun NavGraphBuilder.profileScreenNavigation(
             )
         }
     ) {entry ->
-        Profile(navController = navController, entry.arguments?.getInt("name"))
+        Profile(
+            goToFriendsListScreen = goToFriendsListScreen,
+            entry.arguments?.getInt("name")
+        )
     }
 }

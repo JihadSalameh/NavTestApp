@@ -1,14 +1,15 @@
 package com.example.navtestapp.ui.features.home.friendsList
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.navtestapp.model.User
 import com.example.navtestapp.ui.features.Screen
 
 fun NavGraphBuilder.friendsListScreenNavigation(
-    navController: NavController
+    goToLoginScreen: () -> Unit,
+    goToProfileScreen: (User) -> Unit
 ) {
     composable(
         route = Screen.FriendsListScreen.route + "?email={email}",
@@ -20,6 +21,10 @@ fun NavGraphBuilder.friendsListScreenNavigation(
             }
         )
     ) {entry ->
-        FriendsList(navController = navController, entry.arguments?.getString("email"))
+        FriendsList(
+            goToLoginScreen = goToLoginScreen,
+            goToProfileScreen = goToProfileScreen,
+            entry.arguments?.getString("email")
+        )
     }
 }

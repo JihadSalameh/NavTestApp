@@ -16,7 +16,22 @@ fun NavGraphBuilder.homeNavGraph(
         startDestination = Screen.FriendsListScreen.route,
         route = HOME_NAV_GRAPH_ROUTE
     ) {
-        friendsListScreenNavigation(navController)
-        profileScreenNavigation(navController)
+        friendsListScreenNavigation(
+            goToLoginScreen = {
+                navController.navigate(Screen.LoginScreen.route) {
+                    popUpTo(HOME_NAV_GRAPH_ROUTE) {
+                        inclusive = true
+                    }
+                }
+            },
+            goToProfileScreen = {user ->
+                navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}")
+            }
+        )
+        profileScreenNavigation(
+            goToFriendsListScreen = {
+                navController.popBackStack()
+            }
+        )
     }
 }

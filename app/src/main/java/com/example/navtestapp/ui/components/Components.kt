@@ -193,25 +193,6 @@ fun DeleteBackground(
         },
         modifier = Modifier.fillMaxSize()
     )
-
-//    OutlinedCard(
-//        modifier = Modifier
-//            .padding(8.dp, 4.dp, 8.dp, 4.dp)
-//            .fillMaxSize(),
-//        colors = CardDefaults.cardColors(color),
-//        elevation = CardDefaults.cardElevation(12.dp),
-//        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
-//    ) {
-//        Icon(
-//            imageVector = Icons.Default.Delete,
-//            contentDescription = null,
-//            tint = Color.White,
-//            modifier = Modifier
-//                .align(Alignment.End)
-//                .padding(top = 55.dp, end = 10.dp)
-//                .size(30.dp)
-//        )
-//    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

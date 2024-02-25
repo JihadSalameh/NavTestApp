@@ -30,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.navtestapp.ui.components.AuthButton
 import com.example.navtestapp.ui.components.AuthTextField
 import com.example.navtestapp.ui.components.HeaderTextComponent
@@ -38,13 +37,11 @@ import com.example.navtestapp.ui.components.PasswordTextField
 import com.example.navtestapp.ui.components.PhoneNumberTextField
 import com.example.navtestapp.ui.components.TabComponent
 import com.example.navtestapp.ui.components.TabRowComponent
-import com.example.navtestapp.ui.features.Screen
-
-const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
 
 @Composable
 fun SignUp(
-    navController: NavController
+    goToLoginScreen: () -> Unit,
+    goToFriendsListScreen: (String) -> Unit
 ) {
     var username by remember {
         mutableStateOf("")
@@ -149,13 +146,7 @@ fun SignUp(
             }
             Spacer(modifier = Modifier.padding(10.dp))
             AuthButton(
-                change = {
-                    navController.navigate(Screen.FriendsListScreen.route + "?email=$email") {
-                        popUpTo(AUTH_NAV_GRAPH_ROUTE) {
-                            inclusive = true
-                        }
-                    }
-                },
+                change = { goToFriendsListScreen(email) },
                 lbl = "Signup"
             )
             Spacer(modifier = Modifier.padding(10.dp))
@@ -171,7 +162,7 @@ fun SignUp(
                     color = MaterialTheme.colorScheme.onBackground
                 )
                 TextButton(
-                    onClick = { navController.popBackStack() }
+                    onClick = goToLoginScreen
                 ) {
                     Text(
                         text = "Login",

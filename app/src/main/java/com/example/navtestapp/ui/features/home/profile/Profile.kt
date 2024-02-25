@@ -14,13 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.navtestapp.ui.components.AppButton
 import com.example.navtestapp.ui.components.HeaderTextComponent
 
 @Composable
 fun Profile(
-    navController: NavController,
+    goToFriendsListScreen: () -> Unit,
     name: Int?
 ) {
     Surface(
@@ -39,7 +38,7 @@ fun Profile(
             Text(text = stringResource(id = name!!), color = MaterialTheme.colorScheme.onBackground)
             Spacer(modifier = Modifier.padding(10.dp))
             AppButton(
-                change = { navController.popBackStack() },
+                change = goToFriendsListScreen,
                 lbl = "Back"
             )
         }

@@ -49,22 +49,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.navtestapp.R
 import com.example.navtestapp.data.Datasource
+import com.example.navtestapp.model.User
 import com.example.navtestapp.ui.components.AlertDialogComponent
 import com.example.navtestapp.ui.components.AppButton
 import com.example.navtestapp.ui.components.HeaderTextComponent
 import com.example.navtestapp.ui.components.UserList
-import com.example.navtestapp.ui.features.Screen
 import kotlinx.coroutines.launch
-
-const val HOME_NAV_GRAPH_ROUTE = "home_navigation_graph_route"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FriendsList(
-    navController: NavController,
+    goToLoginScreen: () -> Unit,
+    goToProfileScreen: (User) -> Unit,
     name: String?
 ) {
     val temp = remember {
@@ -221,19 +219,16 @@ fun FriendsList(
                             Text(text = "Hello, $name", color = MaterialTheme.colorScheme.onBackground)
                         }
                         AppButton(
-                            change = {
-                                navController.navigate(Screen.LoginScreen.route) {
-                                    popUpTo(HOME_NAV_GRAPH_ROUTE) {
-                                        inclusive = true
-                                    }
-                                }
-                            },
+                            change = goToLoginScreen,
                             lbl = "logout"
                         )
                     }
                     Spacer(modifier = Modifier.padding(10.dp))
                     Divider(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onBackground)
-                    UserList(users = temp, navController = navController)
+                    UserList(
+                        users = temp,
+                        goToProfileScreen = goToProfileScreen
+                    )
                 }
             }
         }

@@ -19,19 +19,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.navtestapp.model.User
-import com.example.navtestapp.ui.features.Screen
 
 @Composable
 fun CardComponent(
     user: User,
-    navController: NavController
+    goToProfileScreen: (User) -> Unit
 ) {
     ListItem(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}") },
+            .clickable { goToProfileScreen(user) },
         headlineContent = {
             Text(
                 text = stringResource(user.stringResourceId),
@@ -59,7 +57,10 @@ fun CardComponent(
 }
 
 @Composable
-fun UserList(users: MutableList<User>, navController: NavController) {
+fun UserList(
+    users: MutableList<User>,
+    goToProfileScreen: (User) -> Unit
+) {
     LazyColumn {
         items(
             items = users,
@@ -71,7 +72,10 @@ fun UserList(users: MutableList<User>, navController: NavController) {
                     users -= user
                 }
             ) { user1 ->
-                CardComponent(user = user1, navController = navController)
+                CardComponent(
+                    user = user1,
+                    goToProfileScreen = goToProfileScreen
+                )
             }
         }
     }

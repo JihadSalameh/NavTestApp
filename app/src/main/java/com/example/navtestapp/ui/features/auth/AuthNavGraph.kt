@@ -16,7 +16,29 @@ fun NavGraphBuilder.authNavGraph(
         startDestination = Screen.LoginScreen.route,
         route = AUTH_NAV_GRAPH_ROUTE
     ) {
-        loginScreenNavigation(navController)
-        signupScreenNavigation(navController)
+        loginScreenNavigation(
+            goToSignUpScreen = {
+                navController.navigate(Screen.SignUpScreen.route)
+            },
+            goToFriendsListScreen = {email ->
+                navController.navigate(Screen.FriendsListScreen.route + "?email=$email") {
+                    popUpTo(AUTH_NAV_GRAPH_ROUTE) {
+                        inclusive = true
+                    }
+                }
+            }
+        )
+        signupScreenNavigation(
+            goToFriendsListScreen = {email ->
+                navController.navigate(Screen.FriendsListScreen.route + "?email=$email") {
+                    popUpTo(AUTH_NAV_GRAPH_ROUTE) {
+                        inclusive = true
+                    }
+                }
+            },
+            goToLoginScreen = {
+                navController.popBackStack()
+            }
+        )
     }
 }
