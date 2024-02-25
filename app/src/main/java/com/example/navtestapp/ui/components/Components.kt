@@ -14,7 +14,10 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -45,6 +48,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
@@ -61,6 +65,12 @@ fun HeaderTextComponent(
         fontSize = 26.sp,
         color = MaterialTheme.colorScheme.onBackground
     )
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun HeaderTextComponentPreview() {
+    HeaderTextComponent(name = "sample")
 }
 
 @Composable
@@ -85,6 +95,12 @@ fun AuthTextField(
         },
         colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onBackground, unfocusedTextColor = MaterialTheme.colorScheme.onBackground)
     )
+}
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun AuthTextFieldPreview() {
+    AuthTextField(val1 = "", change = {}, placeHolder = "test", imageVector = Icons.Default.Email)
 }
 
 @Composable
@@ -112,6 +128,12 @@ fun PasswordTextField(
     )
 }
 
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun PasswordTextFieldPreview() {
+    PasswordTextField(val1 = "", change = {}, placeHolder = "test", imageVector = Icons.Default.Lock)
+}
+
 @Composable
 fun PhoneNumberTextField(
     val1: String,
@@ -137,6 +159,12 @@ fun PhoneNumberTextField(
     )
 }
 
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun PhoneNumberTextFieldPreview() {
+    PasswordTextField(val1 = "", change = {}, placeHolder = "test", imageVector = Icons.Default.Phone)
+}
+
 @Composable
 fun AuthButton(
     change: () -> Unit,
@@ -154,6 +182,12 @@ fun AuthButton(
     }
 }
 
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun AuthButtonPreview() {
+    AuthButton(change = {}, lbl = "test")
+}
+
 @Composable
 fun AppButton(
     change: () -> Unit,
@@ -168,6 +202,12 @@ fun AppButton(
     ) {
         Text(text = lbl, color = MaterialTheme.colorScheme.onPrimary)
     }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun AppButtonPreview() {
+    AppButton(change = {}, lbl = "test")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -263,4 +303,10 @@ fun AlertDialogComponent(
             Text(text = body)
         }
     )
+}
+
+@Preview
+@Composable
+fun AlertDialogComponentPreview() {
+    AlertDialogComponent(onDismiss = {}, title = "test", body = "test")
 }

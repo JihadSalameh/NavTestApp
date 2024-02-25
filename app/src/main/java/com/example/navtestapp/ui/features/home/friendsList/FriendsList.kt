@@ -47,6 +47,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.navtestapp.R
@@ -58,9 +59,23 @@ import com.example.navtestapp.ui.components.HeaderTextComponent
 import com.example.navtestapp.ui.components.UserList
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FriendsList(
+    goToLoginScreen: () -> Unit,
+    goToProfileScreen: (User) -> Unit,
+    name: String?
+) {
+    FriendsListScreen(
+        goToLoginScreen = goToLoginScreen,
+        goToProfileScreen = goToProfileScreen,
+        name = name
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+
+@Composable
+fun FriendsListScreen(
     goToLoginScreen: () -> Unit,
     goToProfileScreen: (User) -> Unit,
     name: String?
@@ -233,4 +248,14 @@ fun FriendsList(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun FriendsListScreenPreview() {
+    FriendsListScreen(
+        goToLoginScreen = {},
+        goToProfileScreen = {},
+        name = ""
+    )
 }

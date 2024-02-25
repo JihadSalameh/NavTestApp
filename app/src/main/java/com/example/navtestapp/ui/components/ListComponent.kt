@@ -17,8 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.navtestapp.R
 import com.example.navtestapp.model.User
 
 @Composable
@@ -79,4 +81,13 @@ fun UserList(
             }
         }
     }
+}
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun CardComponentPreview() {
+    CardComponent(
+        user = User(imageResourceId = R.drawable.image1, stringResourceId = R.string.user1),
+        goToProfileScreen = {}
+    )
 }
