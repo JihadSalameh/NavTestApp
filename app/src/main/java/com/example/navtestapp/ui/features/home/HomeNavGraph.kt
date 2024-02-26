@@ -11,8 +11,7 @@ import com.example.navtestapp.ui.features.home.profile.profileScreenNavigation
 const val HOME_NAV_GRAPH_ROUTE = "home_navigation_graph_route"
 
 fun NavGraphBuilder.homeNavGraph(
-    navController: NavController,
-    userViewModel: UserViewModel
+    navController: NavController
 ) {
     navigation(
         startDestination = Screen.FriendsListScreen.route,
@@ -28,8 +27,7 @@ fun NavGraphBuilder.homeNavGraph(
             },
             goToProfileScreen = {user ->
                 navController.navigate(Screen.ProfileScreen.route + "/${user.stringResourceId}")
-            },
-            userViewModel = userViewModel
+            }
         )
         profileScreenNavigation(
             goToFriendsListScreen = {

@@ -10,8 +10,7 @@ import com.example.navtestapp.ui.features.Screen
 
 fun NavGraphBuilder.friendsListScreenNavigation(
     goToLoginScreen: () -> Unit,
-    goToProfileScreen: (User) -> Unit,
-    userViewModel: UserViewModel
+    goToProfileScreen: (User) -> Unit
 ) {
     composable(
         route = Screen.FriendsListScreen.route + "?email={email}",
@@ -26,8 +25,7 @@ fun NavGraphBuilder.friendsListScreenNavigation(
         FriendsList(
             goToLoginScreen = goToLoginScreen,
             goToProfileScreen = goToProfileScreen,
-            entry.arguments?.getString("email"),
-            userViewModel = userViewModel
+            entry.arguments?.getString("email")
         )
     }
 }

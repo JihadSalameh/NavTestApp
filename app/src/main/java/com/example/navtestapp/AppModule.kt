@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Binds
+    @Provides
     @Singleton
     fun ProvideDataSource(): Datasource {
         return Datasource()

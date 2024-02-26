@@ -5,16 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.navtestapp.data.Datasource
 import com.example.navtestapp.ui.features.AppNav
 import com.example.navtestapp.ui.theme.NavTestAppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: MyViewModel by viewModels()
-    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             NavTestAppTheme {
-                AppNav(userViewModel)
+                AppNav()
             }
         }
     }

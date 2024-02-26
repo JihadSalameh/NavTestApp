@@ -49,6 +49,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.navtestapp.R
 import com.example.navtestapp.UserViewModel
 import com.example.navtestapp.data.Datasource
@@ -64,7 +65,7 @@ fun FriendsList(
     goToLoginScreen: () -> Unit,
     goToProfileScreen: (User) -> Unit,
     name: String?,
-    userViewModel: UserViewModel
+    userViewModel: UserViewModel = hiltViewModel()
 ) {
     FriendsListScreen(
         goToLoginScreen = goToLoginScreen,

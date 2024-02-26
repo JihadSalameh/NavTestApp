@@ -10,13 +10,13 @@ import com.example.navtestapp.ui.features.home.homeNavGraph
 const val AUTH_NAV_GRAPH_ROUTE = "authentication_navigation_graph_route"
 
 @Composable
-fun AppNav(userViewModel: UserViewModel) {
+fun AppNav() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = AUTH_NAV_GRAPH_ROUTE
     ) {
         authNavGraph(navController)
-        homeNavGraph(navController, userViewModel)
+        homeNavGraph(navController)
     }
 }
