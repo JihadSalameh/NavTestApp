@@ -13,6 +13,8 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -21,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.navtestapp.R
+import com.example.navtestapp.UserViewModel
 import com.example.navtestapp.model.User
 
 @Composable
@@ -60,18 +63,18 @@ fun CardComponent(
 
 @Composable
 fun UserList(
-    users: MutableList<User>,
-    goToProfileScreen: (User) -> Unit
+    goToProfileScreen: (User) -> Unit,
+    userViewModel: UserViewModel
 ) {
     LazyColumn {
         items(
-            items = users,
+            items = userViewModel.users,
             key = { it.stringResourceId }
         ) {user ->
             SwipeToDeleteContainer(
                 item = user,
                 onSwipe = {
-                    users -= user
+                    userViewModel.removeUser(user)
                 }
             ) { user1 ->
                 CardComponent(
@@ -87,7 +90,7 @@ fun UserList(
 @Composable
 fun CardComponentPreview() {
     CardComponent(
-        user = User(imageResourceId = R.drawable.image1, stringResourceId = R.string.user1),
+        user = User(1, imageResourceId = R.drawable.image1, stringResourceId = R.string.user1),
         goToProfileScreen = {}
     )
 }
