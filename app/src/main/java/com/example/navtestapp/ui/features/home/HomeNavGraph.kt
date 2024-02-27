@@ -3,7 +3,6 @@ package com.example.navtestapp.ui.features.home
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
-import com.example.navtestapp.UserViewModel
 import com.example.navtestapp.ui.features.Screen
 import com.example.navtestapp.ui.features.home.friendsList.friendsListScreenNavigation
 import com.example.navtestapp.ui.features.home.profile.profileScreenNavigation

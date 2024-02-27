@@ -6,7 +6,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.navtestapp.UserViewModel
 import com.example.navtestapp.ui.features.Screen
 
 fun NavGraphBuilder.profileScreenNavigation(

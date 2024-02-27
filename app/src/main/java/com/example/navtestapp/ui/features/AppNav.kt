@@ -3,7 +3,6 @@ package com.example.navtestapp.ui.features
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.example.navtestapp.UserViewModel
 import com.example.navtestapp.ui.features.auth.authNavGraph
 import com.example.navtestapp.ui.features.home.homeNavGraph
 

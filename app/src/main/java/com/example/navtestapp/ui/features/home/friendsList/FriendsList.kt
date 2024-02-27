@@ -30,9 +30,11 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,7 +53,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.navtestapp.R
-import com.example.navtestapp.UserViewModel
 import com.example.navtestapp.data.Datasource
 import com.example.navtestapp.model.User
 import com.example.navtestapp.ui.components.AlertDialogComponent
@@ -65,7 +66,7 @@ fun FriendsList(
     goToLoginScreen: () -> Unit,
     goToProfileScreen: (User) -> Unit,
     name: String?,
-    userViewModel: UserViewModel = hiltViewModel()
+    userViewModel: FriendsListViewModel = hiltViewModel()
 ) {
     FriendsListScreen(
         goToLoginScreen = goToLoginScreen,
@@ -81,7 +82,7 @@ fun FriendsListScreen(
     goToLoginScreen: () -> Unit,
     goToProfileScreen: (User) -> Unit,
     name: String?,
-    userViewModel: UserViewModel
+    userViewModel: FriendsListViewModel
 ) {
     var viewAlert by remember {
         mutableStateOf(false)
@@ -93,6 +94,7 @@ fun FriendsListScreen(
     var selectedNavItemIndex by rememberSaveable {
         mutableIntStateOf(0)
     }
+    val scaffoldState = rememberBottomSheetScaffoldState()
 
     if(viewAlert) {
         AlertDialogComponent(
@@ -162,6 +164,11 @@ fun FriendsListScreen(
             gesturesEnabled = true
         ) {
             Scaffold(
+                snackbarHost = {
+                    SnackbarHost(
+                        hostState = scaffoldState.snackbarHostState
+                    )
+                },
                 topBar = {
                     CenterAlignedTopAppBar(
                         title = {
@@ -242,7 +249,8 @@ fun FriendsListScreen(
                     Divider(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onBackground)
                     UserList(
                         userViewModel = userViewModel,
-                        goToProfileScreen = goToProfileScreen
+                        goToProfileScreen = goToProfileScreen,
+                        scaffoldState = scaffoldState
                     )
                 }
             }
@@ -257,6 +265,6 @@ fun FriendsListScreenPreview() {
         goToLoginScreen = {},
         goToProfileScreen = {},
         name = "",
-        userViewModel = UserViewModel(Datasource())
+        userViewModel = FriendsListViewModel(Datasource())
     )
 }
