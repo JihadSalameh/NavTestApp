@@ -1,6 +1,5 @@
 package com.example.navtestapp.ui.features.home.friendsList
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -18,6 +17,11 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerValue
@@ -47,6 +51,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,6 +65,13 @@ import com.example.navtestapp.ui.components.AppButton
 import com.example.navtestapp.ui.components.HeaderTextComponent
 import com.example.navtestapp.ui.components.UserList
 import kotlinx.coroutines.launch
+
+data class NavItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector,
+    val hasNews: Boolean
+)
 
 @Composable
 fun FriendsList(
@@ -84,6 +96,26 @@ fun FriendsListScreen(
     name: String?,
     userViewModel: FriendsListViewModel
 ) {
+    val items = listOf(
+        NavItem(
+            title = "Profile",
+            selectedIcon = Icons.Filled.AccountCircle,
+            unselectedIcon = Icons.Outlined.AccountCircle,
+            hasNews = true
+        ),
+        NavItem(
+            title = "Settings",
+            selectedIcon = Icons.Filled.Settings,
+            unselectedIcon = Icons.Outlined.Settings,
+            hasNews = false
+        ),
+        NavItem(
+            title = "Info",
+            selectedIcon = Icons.Filled.Info,
+            unselectedIcon = Icons.Outlined.Info,
+            hasNews = false
+        )
+    )
     var viewAlert by remember {
         mutableStateOf(false)
     }
@@ -126,39 +158,31 @@ fun FriendsListScreen(
                         color = MaterialTheme.colorScheme.onBackground
                     )
                     Spacer(modifier = Modifier.padding(16.dp))
-                    NavigationDrawerItem(
-                        label = { Text(text = "Profile") },
-                        selected = selectedNavItemIndex == 0,
-                        onClick = {
-                            selectedNavItemIndex = 0
-                            Log.d("profile", "This is your profile")
-                        },
-                        icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
-                        }
-                    )
-                    NavigationDrawerItem(
-                        label = { Text(text = "Settings") },
-                        selected = selectedNavItemIndex == 1,
-                        onClick = {
-                            selectedNavItemIndex = 1
-                            Log.d("Settings", "This is the Settings")
-                        },
-                        icon = {
-                            Icon(imageVector = Icons.Default.Settings, contentDescription = null)
-                        }
-                    )
-                    NavigationDrawerItem(
-                        label = { Text(text = "About Us") },
-                        selected = selectedNavItemIndex == 2,
-                        onClick = {
-                            selectedNavItemIndex = 2
-                            Log.d("About Us", "This is About Us")
-                        },
-                        icon = {
-                            Icon(imageVector = Icons.Default.Info, contentDescription = null)
-                        }
-                    )
+                    items.forEachIndexed { index, item ->
+                        NavigationDrawerItem(
+                            label = { Text(text = item.title) },
+                            selected = selectedNavItemIndex == index,
+                            onClick = {
+                                selectedNavItemIndex = index
+                            },
+                            icon = {
+                                BadgedBox(
+                                    badge = {
+                                        if(item.hasNews) {
+                                            Badge()
+                                        }
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = if(selectedNavItemIndex == index) {
+                                            item.selectedIcon
+                                        } else item.unselectedIcon,
+                                        contentDescription = item.title
+                                    )
+                                }
+                            }
+                        )
+                    }
                 }
             },
             gesturesEnabled = true

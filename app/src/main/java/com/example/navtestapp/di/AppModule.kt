@@ -1,4 +1,4 @@
-package com.example.navtestapp
+package com.example.navtestapp.di
 
 import com.example.navtestapp.data.Datasource
 import dagger.Binds
