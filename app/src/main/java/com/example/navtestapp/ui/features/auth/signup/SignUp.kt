@@ -52,6 +52,9 @@ fun SignUpScreen(
     goToLoginScreen: () -> Unit,
     goToFriendsListScreen: (String) -> Unit
 ) {
+    var isError by remember {
+        mutableStateOf(false)
+    }
     var username by remember {
         mutableStateOf("")
     }
@@ -123,7 +126,8 @@ fun SignUpScreen(
                         email = temp
                     },
                     placeHolder = "Email",
-                    imageVector = Icons.Default.Email
+                    imageVector = Icons.Default.Email,
+                    isError = isError
                 )
                 Spacer(modifier = Modifier.padding(10.dp))
                 PasswordTextField(
@@ -155,7 +159,11 @@ fun SignUpScreen(
             }
             Spacer(modifier = Modifier.padding(10.dp))
             AuthButton(
-                change = { goToFriendsListScreen(email) },
+                change = {
+                    if(selectedTab == 0 && !email.contains("@")) {
+                        isError = true
+                    } else goToFriendsListScreen(email)
+                },
                 lbl = "Signup"
             )
             Spacer(modifier = Modifier.padding(10.dp))
