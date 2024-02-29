@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.navtestapp.ui.components.HeaderTextComponent
 import com.example.navtestapp.ui.components.TabComponent
 import com.example.navtestapp.ui.components.TabRowComponent
@@ -23,10 +25,13 @@ fun Login(
     goToSignUpScreen: () -> Unit,
     loginViewModel: LoginViewModel = hiltViewModel()
 ) {
+    val uiModel by loginViewModel.uiModel.collectAsStateWithLifecycle()
+
     LoginScreen(
         goToFriendsListScreen = goToFriendsListScreen,
         goToSignUpScreen = goToSignUpScreen,
-        loginViewModel = loginViewModel
+        loginViewModel = loginViewModel,
+        uiModel = uiModel
     )
 }
 
@@ -34,7 +39,8 @@ fun Login(
 fun LoginScreen(
     goToFriendsListScreen: (String) -> Unit,
     goToSignUpScreen: () -> Unit,
-    loginViewModel: LoginViewModel
+    loginViewModel: LoginViewModel,
+    uiModel: LoginUiModel
 ) {
     val tiles = listOf("Email Address", "Phone Number")
     Scaffold(
@@ -69,7 +75,8 @@ fun LoginScreen(
             Spacer(modifier = Modifier.padding(10.dp))
             LoginForm(
                 loginViewModel = loginViewModel,
-                goToFriendsListScreen = goToFriendsListScreen
+                goToFriendsListScreen = goToFriendsListScreen,
+                uiModel = uiModel
             )
             Spacer(modifier = Modifier.padding(10.dp))
             LoginFooterComponent(

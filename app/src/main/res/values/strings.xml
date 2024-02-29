@@ -10,4 +10,6 @@
     <string name="user8">Saed</string>
     <string name="user9">Ali</string>
     <string name="user10">Yousef</string>
+    <string name="alert_title">Share Profile</string>
+    <string name="alert_body">share your profile with other users to become friends</string>
 </resources>

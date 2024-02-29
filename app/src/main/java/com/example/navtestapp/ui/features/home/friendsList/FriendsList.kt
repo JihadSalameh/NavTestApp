@@ -16,9 +16,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.navtestapp.R
 import com.example.navtestapp.data.Datasource
 import com.example.navtestapp.model.User
 
@@ -33,7 +35,7 @@ fun FriendsList(
         goToLoginScreen = goToLoginScreen,
         goToProfileScreen = goToProfileScreen,
         name = name,
-        userViewModel = userViewModel
+        userViewModel = userViewModel,
     )
 }
 
@@ -55,8 +57,8 @@ fun FriendsListScreen(
 
     if(viewAlert) {
         AlertDialogComponent(
-            title = "Share Profile",
-            body = "share your profile with other users to become friends",
+            title = stringResource(id = R.string.alert_title),
+            body = stringResource(id = R.string.alert_body),
             onDismiss = {
                 viewAlert = false
             }
@@ -119,10 +121,10 @@ fun FriendsListScreen(
 @Preview
 @Composable
 fun FriendsListScreenPreview() {
-    FriendsListScreen(
+    FriendsList(
         goToLoginScreen = {},
         goToProfileScreen = {},
         name = "",
-        userViewModel = FriendsListViewModel(Datasource())
+        userViewModel = FriendsListViewModel(Datasource()),
     )
 }

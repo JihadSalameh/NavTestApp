@@ -10,11 +10,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.navtestapp.ui.components.HeaderTextComponent
 import com.example.navtestapp.ui.components.TabComponent
 import com.example.navtestapp.ui.components.TabRowComponent
@@ -25,10 +27,13 @@ fun SignUp(
     goToFriendsListScreen: (String) -> Unit,
     signUpViewModel: SignUpViewModel = hiltViewModel()
 ) {
+    val uiModel by signUpViewModel.uiModel.collectAsStateWithLifecycle()
+
     SignUpScreen(
         goToLoginScreen = goToLoginScreen,
         goToFriendsListScreen = goToFriendsListScreen,
-        signUpViewModel = signUpViewModel
+        signUpViewModel = signUpViewModel,
+        uiModel = uiModel
     )
 }
 
@@ -36,7 +41,8 @@ fun SignUp(
 fun SignUpScreen(
     goToLoginScreen: () -> Unit,
     goToFriendsListScreen: (String) -> Unit,
-    signUpViewModel: SignUpViewModel
+    signUpViewModel: SignUpViewModel,
+    uiModel: SignUpUiModel
 ) {
     val tiles = listOf("Email Address", "Phone Number")
 
@@ -77,7 +83,8 @@ fun SignUpScreen(
             Spacer(modifier = Modifier.padding(10.dp))
             SignUpFormComponent(
                 signUpViewModel = signUpViewModel,
-                goToFriendsListScreen = goToFriendsListScreen
+                goToFriendsListScreen = goToFriendsListScreen,
+                uiModel = uiModel
             )
             Spacer(modifier = Modifier.padding(10.dp))
             SignUpFooterComponent(goToLoginScreen = goToLoginScreen)
