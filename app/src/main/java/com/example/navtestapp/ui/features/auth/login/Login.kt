@@ -27,8 +27,14 @@ fun Login(
 ) {
     val uiModel by loginViewModel.uiModel.collectAsStateWithLifecycle()
 
+    EventHandler(loginViewModel.uiEvents) {
+        when(it) {
+            LoginUiEvents.Error -> { loginViewModel.setIsError() }
+            LoginUiEvents.Success -> { goToFriendsListScreen(uiModel.email) }
+        }
+    }    
+    
     LoginScreen(
-        goToFriendsListScreen = goToFriendsListScreen,
         goToSignUpScreen = goToSignUpScreen,
         loginViewModel = loginViewModel,
         uiModel = uiModel
@@ -37,7 +43,6 @@ fun Login(
 
 @Composable
 fun LoginScreen(
-    goToFriendsListScreen: (String) -> Unit,
     goToSignUpScreen: () -> Unit,
     loginViewModel: LoginViewModel,
     uiModel: LoginUiModel
@@ -47,7 +52,7 @@ fun LoginScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surface),
-    ) {values ->
+    ) { values ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -57,8 +62,12 @@ fun LoginScreen(
         ) {
             HeaderTextComponent(name = "Login")
             Spacer(modifier = Modifier.padding(10.dp))
-            TabRowComponent(modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 0.dp), selectedTabIndex = loginViewModel.selectedTabIndex.intValue) {
-                tiles.forEachIndexed {index, title ->
+            TabRowComponent(
+                modifier = Modifier
+                    .padding(16.dp, 0.dp, 16.dp, 0.dp),
+                selectedTabIndex = loginViewModel.selectedTabIndex.intValue
+            ) {
+                tiles.forEachIndexed { index, title ->
                     TabComponent(
                         selected = loginViewModel.isSelected(index),
                         onClick = { loginViewModel.updateTabIndex(index) },
@@ -75,7 +84,6 @@ fun LoginScreen(
             Spacer(modifier = Modifier.padding(10.dp))
             LoginForm(
                 loginViewModel = loginViewModel,
-                goToFriendsListScreen = goToFriendsListScreen,
                 uiModel = uiModel
             )
             Spacer(modifier = Modifier.padding(10.dp))

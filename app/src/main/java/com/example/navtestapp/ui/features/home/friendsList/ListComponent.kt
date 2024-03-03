@@ -151,7 +151,7 @@ fun <T> SwipeToDeleteContainer(
         }
     )
 
-    LaunchedEffect(key1 = isRemoved) {
+    LaunchedEffect(isRemoved) {
         if(isRemoved) {
             delay(animationDuration.toLong())
             onSwipe(item)

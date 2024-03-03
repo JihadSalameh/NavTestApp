@@ -14,12 +14,16 @@ class LoginViewModel: ViewModel() {
 
     private var _selectedTabIndex = mutableIntStateOf(0)
     var selectedTabIndex = _selectedTabIndex.asIntState()
+
     private var _isError = mutableStateOf(false)
 
     private val _uiModel: MutableStateFlow<LoginUiModel> = MutableStateFlow(
         value = LoginUiModel.initialValue()
     )
     val uiModel = _uiModel.asStateFlow()
+
+    private val _uiEvents = mutableEventQueue<LoginUiEvents>()
+    val uiEvents: EventQueue<LoginUiEvents> = _uiEvents
 
     private fun notifyUiState() {
         _uiModel.value = LoginUiModel(
@@ -52,11 +56,17 @@ class LoginViewModel: ViewModel() {
         return _selectedTabIndex.intValue == index
     }
 
-    fun getIsError(): Boolean {
-        return _isError.value
+    fun getIsError() = _isError.value
+
+    fun setIsError() {
+        _isError.value = true
     }
 
-    fun validateCredentials(email: String) {
-        _isError.value = selectedTabIndex.intValue == 0 && !email.contains("@")
+    fun onLoginClicked() {
+        login(
+            selectedTabIndex = selectedTabIndex.intValue,
+            email = email,
+            onEvent = _uiEvents::push
+        )
     }
 }

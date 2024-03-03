@@ -17,7 +17,6 @@ import com.example.navtestapp.ui.components.PhoneNumberTextField
 @Composable
 fun LoginForm(
     loginViewModel: LoginViewModel,
-    goToFriendsListScreen: (String) -> Unit,
     uiModel: LoginUiModel
 ) {
     if(loginViewModel.selectedTabIndex.intValue == 0) {
@@ -45,12 +44,7 @@ fun LoginForm(
     }
     Spacer(modifier = Modifier.padding(10.dp))
     AuthButton(
-        change = {
-            loginViewModel.validateCredentials(uiModel.email)
-            if(!loginViewModel.getIsError()) {
-                goToFriendsListScreen(uiModel.email)
-            }
-        },
+        change = { loginViewModel.onLoginClicked() },
         lbl = "Login"
     )
 }
